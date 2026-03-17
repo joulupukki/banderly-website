@@ -1,0 +1,116 @@
+---
+const title = "Banderly — A Powerful Tool for Bands";
+const description = "Banderly is the powerful new tool for bands. Coming soon.";
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://banderly.com" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html, body {
+        height: 100%;
+      }
+
+      body {
+        font-family: 'Inter', system-ui, sans-serif;
+        background: #0a0a0f;
+        color: #f0f0f5;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        overflow: hidden;
+        position: relative;
+      }
+
+      /* Subtle animated gradient background */
+      body::before {
+        content: '';
+        position: fixed;
+        inset: 0;
+        background:
+          radial-gradient(ellipse 80% 60% at 50% 0%, rgba(99, 60, 255, 0.15), transparent),
+          radial-gradient(ellipse 60% 50% at 20% 80%, rgba(255, 60, 120, 0.08), transparent),
+          radial-gradient(ellipse 60% 50% at 80% 80%, rgba(60, 180, 255, 0.08), transparent);
+        animation: glow 8s ease-in-out infinite alternate;
+        z-index: 0;
+      }
+
+      @keyframes glow {
+        0%   { opacity: 0.7; }
+        100% { opacity: 1; }
+      }
+
+      .container {
+        position: relative;
+        z-index: 1;
+        text-align: center;
+        padding: 2rem;
+        max-width: 640px;
+      }
+
+      .logo {
+        font-size: clamp(3rem, 8vw, 5rem);
+        font-weight: 800;
+        letter-spacing: -0.03em;
+        background: linear-gradient(135deg, #fff 0%, #c4b5fd 50%, #818cf8 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 1.5rem;
+      }
+
+      .tagline {
+        font-size: clamp(1.1rem, 3vw, 1.35rem);
+        font-weight: 400;
+        color: #a0a0b8;
+        line-height: 1.6;
+        margin-bottom: 3rem;
+      }
+
+      .tagline strong {
+        color: #d0d0e0;
+        font-weight: 600;
+      }
+
+      .badge {
+        display: inline-block;
+        padding: 0.55rem 1.6rem;
+        border: 1px solid rgba(129, 140, 248, 0.3);
+        border-radius: 100px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: #818cf8;
+        background: rgba(129, 140, 248, 0.06);
+      }
+    </style>
+  </head>
+  <body>
+    <main class="container">
+      <h1 class="logo">Banderly</h1>
+      <p class="tagline">
+        A <strong>powerful tool for bands</strong> is on the way.<br />
+        Manage gigs, collaborate with your bandmates, and take your music further.
+      </p>
+      <span class="badge">Coming Soon</span>
+    </main>
+  </body>
+</html>
