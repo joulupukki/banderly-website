@@ -3,6 +3,6 @@ import { defineConfig } from 'astro/config';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://banderly.com',
+  site: 'https://www.banderly.com',
   output: 'static',
 });
