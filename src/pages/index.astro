@@ -1,6 +1,6 @@
 ---
-const title = "Banderly — A Powerful Tool for Bands";
-const description = "Banderly is the powerful new tool for bands. Coming soon.";
+const title = "Banderly — Your Band's Command Center";
+const description = "Manage your songs, build set lists, and own the stage. Banderly is the powerful new tool for bands. Coming soon.";
 ---
 
 <html lang="en">
@@ -15,7 +15,24 @@ const description = "Banderly is the powerful new tool for bands. Coming soon.";
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
     <style>
-      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+      :root {
+        --cobalt: #1d4ed8;
+        --cobalt-light: #3b82f6;
+        --cobalt-bright: #60a5fa;
+        --cobalt-pale: #93bbfd;
+        --bg-deep: #0a0a0f;
+        --bg-card: rgba(15, 15, 25, 0.6);
+        --bg-card-hover: rgba(20, 20, 35, 0.8);
+        --border-subtle: rgba(29, 78, 216, 0.15);
+        --border-glow: rgba(29, 78, 216, 0.35);
+        --text-primary: #f0f0f5;
+        --text-secondary: #a0a0b8;
+        --text-emphasis: #d0d0e0;
+        --glow-cobalt: rgba(29, 78, 216, 0.25);
+        --glow-cobalt-soft: rgba(29, 78, 216, 0.08);
+      }
 
       * {
         margin: 0;
@@ -23,94 +40,660 @@ const description = "Banderly is the powerful new tool for bands. Coming soon.";
         box-sizing: border-box;
       }
 
+      html {
+        scroll-behavior: smooth;
+      }
+
       html, body {
-        height: 100%;
+        min-height: 100%;
       }
 
       body {
         font-family: 'Inter', system-ui, sans-serif;
-        background: #0a0a0f;
-        color: #f0f0f5;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 100vh;
-        overflow: hidden;
+        background: var(--bg-deep);
+        color: var(--text-primary);
+        overflow-x: hidden;
         position: relative;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
       }
 
-      /* Subtle animated gradient background */
-      body::before {
-        content: '';
+      /* ─── Atmospheric background ─── */
+      .bg-atmosphere {
         position: fixed;
         inset: 0;
-        background:
-          radial-gradient(ellipse 80% 60% at 50% 0%, rgba(29, 78, 216, 0.2), transparent),
-          radial-gradient(ellipse 60% 50% at 20% 80%, rgba(59, 130, 246, 0.1), transparent),
-          radial-gradient(ellipse 60% 50% at 80% 80%, rgba(96, 165, 250, 0.08), transparent);
-        animation: glow 8s ease-in-out infinite alternate;
         z-index: 0;
+        pointer-events: none;
+        background:
+          radial-gradient(ellipse 90% 50% at 50% -10%, rgba(29, 78, 216, 0.18), transparent 70%),
+          radial-gradient(ellipse 50% 40% at 15% 85%, rgba(59, 130, 246, 0.08), transparent 60%),
+          radial-gradient(ellipse 50% 40% at 85% 85%, rgba(96, 165, 250, 0.06), transparent 60%);
+        animation: atmosphereShift 12s ease-in-out infinite alternate;
       }
 
-      @keyframes glow {
-        0%   { opacity: 0.7; }
+      .bg-atmosphere::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(circle 600px at 30% 20%, rgba(29, 78, 216, 0.06), transparent),
+          radial-gradient(circle 400px at 70% 60%, rgba(59, 130, 246, 0.04), transparent);
+        animation: atmosphereShift 16s ease-in-out infinite alternate-reverse;
+      }
+
+      @keyframes atmosphereShift {
+        0%   { opacity: 0.6; }
         100% { opacity: 1; }
       }
 
-      .container {
-        position: relative;
+      /* ─── Noise grain overlay ─── */
+      .grain {
+        position: fixed;
+        inset: 0;
         z-index: 1;
-        text-align: center;
-        padding: 2rem;
-        max-width: 640px;
+        pointer-events: none;
+        opacity: 0.025;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+        background-repeat: repeat;
+        background-size: 256px 256px;
       }
 
-      .logo {
-        font-size: clamp(3rem, 8vw, 5rem);
-        font-weight: 800;
-        letter-spacing: -0.03em;
-        background: linear-gradient(135deg, #fff 0%, #93bbfd 50%, #1d4ed8 100%);
+      /* ─── Layout ─── */
+      .page-content {
+        position: relative;
+        z-index: 2;
+      }
+
+      .section {
+        padding: 6rem 1.5rem;
+        max-width: 1120px;
+        margin: 0 auto;
+      }
+
+      /* ─── Hero Section ─── */
+      .hero {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 4rem 1.5rem;
+        position: relative;
+      }
+
+      .hero-badge {
+        display: inline-block;
+        padding: 0.45rem 1.3rem;
+        border: 1px solid var(--border-glow);
+        border-radius: 100px;
+        font-size: 0.7rem;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--cobalt-bright);
+        background: var(--glow-cobalt-soft);
+        margin-bottom: 2.5rem;
+        animation: fadeInDown 0.8s ease-out both;
+      }
+
+      .hero-logo {
+        font-size: clamp(3.5rem, 10vw, 6.5rem);
+        font-weight: 900;
+        letter-spacing: -0.04em;
+        line-height: 1;
+        background: linear-gradient(135deg, #fff 0%, var(--cobalt-pale) 40%, var(--cobalt) 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
         margin-bottom: 1.5rem;
+        animation: fadeInUp 0.8s ease-out 0.1s both;
       }
 
-      .tagline {
-        font-size: clamp(1.1rem, 3vw, 1.35rem);
-        font-weight: 400;
-        color: #a0a0b8;
-        line-height: 1.6;
-        margin-bottom: 3rem;
+      .hero-headline {
+        font-size: clamp(1.25rem, 3.5vw, 1.75rem);
+        font-weight: 300;
+        color: var(--text-emphasis);
+        line-height: 1.5;
+        max-width: 600px;
+        margin-bottom: 1rem;
+        animation: fadeInUp 0.8s ease-out 0.25s both;
       }
 
-      .tagline strong {
-        color: #d0d0e0;
+      .hero-headline strong {
         font-weight: 600;
+        color: var(--text-primary);
       }
 
-      .badge {
+      .hero-sub {
+        font-size: clamp(0.95rem, 2vw, 1.1rem);
+        font-weight: 400;
+        color: var(--text-secondary);
+        line-height: 1.7;
+        max-width: 520px;
+        animation: fadeInUp 0.8s ease-out 0.4s both;
+      }
+
+      .hero-scroll {
+        position: absolute;
+        bottom: 2.5rem;
+        left: 50%;
+        transform: translateX(-50%);
+        animation: fadeInUp 0.8s ease-out 0.6s both;
+      }
+
+      .hero-scroll svg {
+        width: 20px;
+        height: 20px;
+        color: var(--text-secondary);
+        opacity: 0.4;
+        animation: scrollBounce 2s ease-in-out infinite;
+      }
+
+      @keyframes scrollBounce {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(6px); }
+      }
+
+      /* ─── Section headers ─── */
+      .section-label {
+        font-size: 0.7rem;
+        font-weight: 600;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--cobalt-bright);
+        margin-bottom: 1rem;
+        text-align: center;
+      }
+
+      .section-title {
+        font-size: clamp(1.75rem, 5vw, 2.75rem);
+        font-weight: 800;
+        letter-spacing: -0.03em;
+        text-align: center;
+        color: var(--text-primary);
+        margin-bottom: 1rem;
+        line-height: 1.15;
+      }
+
+      .section-subtitle {
+        font-size: clamp(0.95rem, 2vw, 1.1rem);
+        color: var(--text-secondary);
+        text-align: center;
+        max-width: 560px;
+        margin: 0 auto 4rem;
+        line-height: 1.65;
+      }
+
+      /* ─── Feature cards (primary) ─── */
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.25rem;
+      }
+
+      .feature-card {
+        background: var(--bg-card);
+        border: 1px solid var(--border-subtle);
+        border-radius: 16px;
+        padding: 2.25rem 2rem;
+        position: relative;
+        overflow: hidden;
+        transition: border-color 0.4s ease, background 0.4s ease, transform 0.3s ease;
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+      }
+
+      .feature-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, var(--cobalt-bright), transparent);
+        opacity: 0;
+        transition: opacity 0.4s ease;
+      }
+
+      .feature-card:hover {
+        border-color: var(--border-glow);
+        background: var(--bg-card-hover);
+        transform: translateY(-2px);
+      }
+
+      .feature-card:hover::before {
+        opacity: 0.5;
+      }
+
+      .feature-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 12px;
+        background: linear-gradient(135deg, var(--glow-cobalt), var(--glow-cobalt-soft));
+        border: 1px solid var(--border-subtle);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 1.25rem;
+      }
+
+      .feature-icon svg {
+        width: 22px;
+        height: 22px;
+        color: var(--cobalt-bright);
+      }
+
+      .feature-card h3 {
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        margin-bottom: 0.65rem;
+        letter-spacing: -0.01em;
+      }
+
+      .feature-card p {
+        font-size: 0.9rem;
+        color: var(--text-secondary);
+        line-height: 1.65;
+      }
+
+      /* ─── Divider ─── */
+      .section-divider {
+        width: 100%;
+        max-width: 1120px;
+        margin: 0 auto;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, var(--border-subtle), transparent);
+      }
+
+      /* ─── Details grid (secondary features) ─── */
+      .details-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1px;
+        background: var(--border-subtle);
+        border-radius: 16px;
+        overflow: hidden;
+        border: 1px solid var(--border-subtle);
+      }
+
+      .detail-cell {
+        background: var(--bg-deep);
+        padding: 2rem 1.75rem;
+        transition: background 0.3s ease;
+      }
+
+      .detail-cell:hover {
+        background: rgba(15, 15, 25, 0.9);
+      }
+
+      .detail-icon {
+        font-size: 1.35rem;
+        margin-bottom: 0.85rem;
+        display: block;
+        line-height: 1;
+      }
+
+      .detail-icon svg {
+        width: 20px;
+        height: 20px;
+        color: var(--cobalt-bright);
+      }
+
+      .detail-cell h4 {
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        margin-bottom: 0.4rem;
+        letter-spacing: -0.01em;
+      }
+
+      .detail-cell p {
+        font-size: 0.8rem;
+        color: var(--text-secondary);
+        line-height: 1.55;
+      }
+
+      /* ─── Closing CTA ─── */
+      .closing {
+        text-align: center;
+        padding: 8rem 1.5rem;
+        position: relative;
+      }
+
+      .closing::before {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 600px;
+        height: 400px;
+        background: radial-gradient(ellipse at center, var(--glow-cobalt), transparent 70%);
+        pointer-events: none;
+        opacity: 0.4;
+      }
+
+      .closing-title {
+        font-size: clamp(1.75rem, 5vw, 2.75rem);
+        font-weight: 800;
+        letter-spacing: -0.03em;
+        margin-bottom: 1rem;
+        line-height: 1.15;
+        position: relative;
+      }
+
+      .closing-sub {
+        font-size: clamp(0.95rem, 2vw, 1.1rem);
+        color: var(--text-secondary);
+        max-width: 440px;
+        margin: 0 auto 2.5rem;
+        line-height: 1.65;
+        position: relative;
+      }
+
+      .closing-badge {
         display: inline-block;
-        padding: 0.55rem 1.6rem;
-        border: 1px solid rgba(29, 78, 216, 0.35);
+        padding: 0.65rem 2rem;
+        border: 1px solid var(--border-glow);
         border-radius: 100px;
         font-size: 0.85rem;
         font-weight: 600;
         letter-spacing: 0.06em;
         text-transform: uppercase;
-        color: #60a5fa;
-        background: rgba(29, 78, 216, 0.08);
+        color: var(--cobalt-bright);
+        background: var(--glow-cobalt-soft);
+        position: relative;
+        box-shadow: 0 0 30px var(--glow-cobalt-soft), 0 0 60px rgba(29, 78, 216, 0.04);
+      }
+
+      /* ─── Footer ─── */
+      .footer {
+        text-align: center;
+        padding: 2rem 1.5rem 3rem;
+        font-size: 0.75rem;
+        color: rgba(160, 160, 184, 0.4);
+        letter-spacing: 0.02em;
+        position: relative;
+        z-index: 2;
+      }
+
+      /* ─── Animations ─── */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes fadeInDown {
+        from {
+          opacity: 0;
+          transform: translateY(-12px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Scroll-triggered animation */
+      .reveal {
+        opacity: 0;
+        transform: translateY(24px);
+        transition: opacity 0.7s ease, transform 0.7s ease;
+      }
+
+      .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .reveal-delay-1 { transition-delay: 0.1s; }
+      .reveal-delay-2 { transition-delay: 0.2s; }
+      .reveal-delay-3 { transition-delay: 0.3s; }
+      .reveal-delay-4 { transition-delay: 0.35s; }
+      .reveal-delay-5 { transition-delay: 0.4s; }
+      .reveal-delay-6 { transition-delay: 0.45s; }
+
+      /* ─── Responsive ─── */
+      @media (max-width: 768px) {
+        .section {
+          padding: 4rem 1.25rem;
+        }
+
+        .features-grid {
+          grid-template-columns: 1fr;
+          gap: 1rem;
+        }
+
+        .feature-card {
+          padding: 1.75rem 1.5rem;
+        }
+
+        .details-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .closing {
+          padding: 5rem 1.5rem;
+        }
+      }
+
+      @media (min-width: 769px) and (max-width: 1024px) {
+        .details-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
       }
     </style>
   </head>
   <body>
-    <main class="container">
-      <h1 class="logo">Banderly</h1>
-      <p class="tagline">
-        A <strong>powerful tool for bands</strong> is on the way.<br />
-        Manage gigs, collaborate with your bandmates, and take your music further.
-      </p>
-      <span class="badge">Coming Soon</span>
-    </main>
+    <div class="bg-atmosphere"></div>
+    <div class="grain"></div>
+
+    <div class="page-content">
+
+      <!-- Hero -->
+      <section class="hero">
+        <span class="hero-badge">Coming Soon</span>
+        <h1 class="hero-logo">Banderly</h1>
+        <p class="hero-headline">
+          Your band's <strong>command center</strong>
+        </p>
+        <p class="hero-sub">
+          Manage your songs, build set lists, and own the stage — all in one place.
+        </p>
+        <div class="hero-scroll">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </div>
+      </section>
+
+      <!-- Primary Features -->
+      <section class="section">
+        <p class="section-label reveal">What you get</p>
+        <h2 class="section-title reveal">Everything your band needs</h2>
+        <p class="section-subtitle reveal">From rehearsal prep to stage performance, Banderly handles the details so you can focus on the music.</p>
+
+        <div class="features-grid">
+
+          <div class="feature-card reveal reveal-delay-1">
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 18V5l12-2v13"></path>
+                <circle cx="6" cy="18" r="3"></circle>
+                <circle cx="18" cy="16" r="3"></circle>
+              </svg>
+            </div>
+            <h3>Song Management</h3>
+            <p>Build your full repertoire with keys, feel, lyrics, vocal parts, and instrument assignments. Import via CSV, JSON, or batch entry.</p>
+          </div>
+
+          <div class="feature-card reveal reveal-delay-2">
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="8" y1="6" x2="21" y2="6"></line>
+                <line x1="8" y1="12" x2="21" y2="12"></line>
+                <line x1="8" y1="18" x2="21" y2="18"></line>
+                <line x1="3" y1="6" x2="3.01" y2="6"></line>
+                <line x1="3" y1="12" x2="3.01" y2="12"></line>
+                <line x1="3" y1="18" x2="3.01" y2="18"></line>
+              </svg>
+            </div>
+            <h3>Set List Builder</h3>
+            <p>Drag-and-drop creation with songs, section headers, instrument sections, and notes. Track song count and total duration as you build.</p>
+          </div>
+
+          <div class="feature-card reveal reveal-delay-3">
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+              </svg>
+            </div>
+            <h3>Magic Set List Generator</h3>
+            <p>Auto-generate optimized set lists that balance singer variety, key flow, energy arc, mood, and instrumentation — with customizable priorities.</p>
+          </div>
+
+          <div class="feature-card reveal reveal-delay-4">
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                <line x1="8" y1="21" x2="16" y2="21"></line>
+                <line x1="12" y1="17" x2="12" y2="21"></line>
+              </svg>
+            </div>
+            <h3>Performance Mode</h3>
+            <p>Full-screen stage display with lyrics, light and dark themes, adjustable font sizes, and Bluetooth page turner support. Built for the stage.</p>
+          </div>
+
+        </div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- Details Grid -->
+      <section class="section">
+        <p class="section-label reveal">And there's more</p>
+        <h2 class="section-title reveal">Built for real bands</h2>
+        <p class="section-subtitle reveal">The details that make the difference when you're juggling rehearsals, gigs, and everything in between.</p>
+
+        <div class="details-grid reveal">
+
+          <div class="detail-cell reveal reveal-delay-1">
+            <span class="detail-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+              </svg>
+            </span>
+            <h4>Real-Time Collaboration</h4>
+            <p>Changes sync instantly across all devices. Your whole band stays on the same page.</p>
+          </div>
+
+          <div class="detail-cell reveal reveal-delay-2">
+            <span class="detail-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="16 16 12 12 8 16"></polyline>
+                <line x1="12" y1="12" x2="12" y2="21"></line>
+                <path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"></path>
+                <polyline points="16 16 12 12 8 16"></polyline>
+              </svg>
+            </span>
+            <h4>Multi-Band Support</h4>
+            <p>Play in more than one group? Switch between bands seamlessly from a single account.</p>
+          </div>
+
+          <div class="detail-cell reveal reveal-delay-3">
+            <span class="detail-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <line x1="19" y1="8" x2="19" y2="14"></line>
+                <line x1="22" y1="11" x2="16" y2="11"></line>
+              </svg>
+            </span>
+            <h4>Roster &amp; Invite Codes</h4>
+            <p>Manage your lineup and invite bandmates with simple shareable codes. No email chains required.</p>
+          </div>
+
+          <div class="detail-cell reveal reveal-delay-4">
+            <span class="detail-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+            </span>
+            <h4>Export Anywhere</h4>
+            <p>Export your songs and set lists as CSV, JSON, or formatted PDF. Your data, your way.</p>
+          </div>
+
+          <div class="detail-cell reveal reveal-delay-5">
+            <span class="detail-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="1" y1="1" x2="23" y2="23"></line>
+                <path d="M16.72 11.06A10.94 10.94 0 0 1 19 12.55"></path>
+                <path d="M5 12.55a10.94 10.94 0 0 1 5.17-2.39"></path>
+                <path d="M10.71 5.05A16 16 0 0 1 22.56 9"></path>
+                <path d="M1.42 9a15.91 15.91 0 0 1 4.7-2.88"></path>
+                <path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path>
+                <line x1="12" y1="20" x2="12.01" y2="20"></line>
+              </svg>
+            </span>
+            <h4>Works Offline</h4>
+            <p>No Wi-Fi at the venue? No problem. Banderly works offline and syncs when you're back online.</p>
+          </div>
+
+          <div class="detail-cell reveal reveal-delay-6">
+            <span class="detail-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="5.5" cy="17.5" r="2.5"></circle>
+                <circle cx="17.5" cy="15.5" r="2.5"></circle>
+                <path d="M8 17V5l12-2v12"></path>
+              </svg>
+            </span>
+            <h4>Vocal &amp; Instrument Assignments</h4>
+            <p>Assign lead and harmony vocals, plus instruments, to every song. Know who's doing what before you hit the stage.</p>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Closing CTA -->
+      <section class="closing">
+        <h2 class="closing-title reveal">We're tuning up.</h2>
+        <p class="closing-sub reveal">Banderly is almost ready. A better way to manage your band is coming soon.</p>
+        <span class="closing-badge reveal reveal-delay-1">Coming Soon</span>
+      </section>
+
+      <footer class="footer">
+        &copy; 2026 Banderly
+      </footer>
+
+    </div>
+
+    <script>
+      // Intersection Observer for scroll-reveal animations
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -40px 0px'
+      });
+
+      document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
   </body>
 </html>
