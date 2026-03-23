@@ -511,6 +511,23 @@ const description = "Manage your songs, build set lists, and own the stage. Band
         z-index: 2;
       }
 
+      .footer-links {
+        display: flex;
+        gap: 1.5rem;
+        justify-content: center;
+        margin-bottom: 0.75rem;
+      }
+
+      .footer-links a {
+        color: rgba(160, 160, 184, 0.5);
+        text-decoration: none;
+        transition: color 0.2s ease;
+      }
+
+      .footer-links a:hover {
+        color: var(--cobalt-bright);
+      }
+
       /* ─── Animations ─── */
       @keyframes fadeInUp {
         from {
@@ -790,6 +807,10 @@ const description = "Manage your songs, build set lists, and own the stage. Band
       </section>
 
       <footer class="footer">
+        <div class="footer-links">
+          <a href="/privacy">Privacy Policy</a>
+          <a href="/terms">Terms of Use</a>
+        </div>
         &copy; 2026 Banderly
       </footer>
 
