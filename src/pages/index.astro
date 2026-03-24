@@ -8,11 +8,29 @@ const description = "Manage your songs, build set lists, and own the stage. Band
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
+    <link rel="canonical" href="https://www.banderly.com/" />
+
+    <!-- Open Graph -->
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://www.banderly.com" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta property="og:image" content="https://www.banderly.com/app-icon.png" />
+    <meta property="og:image:width" content="1024" />
+    <meta property="og:image:height" content="1024" />
+    <meta property="og:image:alt" content="Banderly app icon" />
+    <meta property="og:site_name" content="Banderly" />
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content="https://www.banderly.com/app-icon.png" />
+
+    <!-- Favicon & touch icons -->
+    <link rel="icon" type="image/png" href="/app-icon.png" />
+    <link rel="apple-touch-icon" href="/app-icon.png" />
+
     <title>{title}</title>
     <style>
       @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
@@ -606,6 +624,50 @@ const description = "Manage your songs, build set lists, and own the stage. Band
         }
       }
     </style>
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "name": "Banderly",
+            "legalName": "Bluegrass Guru, LLC",
+            "url": "https://www.banderly.com",
+            "logo": "https://www.banderly.com/app-icon.png",
+            "description": "Manage your songs, build set lists, and own the stage. Banderly is the powerful new tool for bands.",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "6705 W 10050 N",
+              "addressLocality": "Highland",
+              "addressRegion": "UT",
+              "postalCode": "84003",
+              "addressCountry": "US"
+            },
+            "email": "support@bluegrassguru.com"
+          },
+          {
+            "@type": "WebSite",
+            "name": "Banderly",
+            "url": "https://www.banderly.com"
+          },
+          {
+            "@type": "SoftwareApplication",
+            "name": "Banderly",
+            "operatingSystem": "iOS, Android, Web",
+            "applicationCategory": "MusicApplication",
+            "description": "Manage your songs, build set lists, and own the stage. Banderly is the powerful new tool for bands.",
+            "image": "https://www.banderly.com/app-icon.png",
+            "offers": {
+              "@type": "Offer",
+              "availability": "https://schema.org/PreOrder",
+              "price": "0",
+              "priceCurrency": "USD"
+            }
+          }
+        ]
+      }
+    </script>
   </head>
   <body>
     <div class="bg-atmosphere"></div>
