@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Banderly — Hero Experiments</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+    :root {
+      --cobalt: #1d4ed8;
+      --cobalt-light: #3b82f6;
+      --cobalt-bright: #60a5fa;
+      --cobalt-pale: #93bbfd;
+      --bg-deep: #0a0a0f;
+      --text-primary: #f0f0f5;
+      --text-secondary: #a0a0b8;
+      --text-emphasis: #d0d0e0;
+      --glow-cobalt: rgba(29, 78, 216, 0.25);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg-deep);
+      color: var(--text-primary);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .experiment-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(10, 10, 15, 0.9);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding: 0.75rem 1.5rem;
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .experiment-nav span {
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--cobalt-bright);
+      margin-right: 0.5rem;
+    }
+
+    .experiment-nav a {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      text-decoration: none;
+      padding: 0.3rem 0.75rem;
+      border-radius: 6px;
+      border: 1px solid rgba(255,255,255,0.08);
+      transition: all 0.2s;
+    }
+
+    .experiment-nav a:hover {
+      color: var(--text-primary);
+      border-color: var(--cobalt-bright);
+    }
+
+    .experiment {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 6rem 1.5rem 4rem;
+      position: relative;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .experiment::before {
+      content: attr(data-label);
+      position: absolute;
+      top: 5rem;
+      left: 1.5rem;
+      font-size: 0.65rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--cobalt-bright);
+      background: rgba(29, 78, 216, 0.08);
+      padding: 0.3rem 0.75rem;
+      border-radius: 4px;
+    }
+
+    /* Shared elements */
+    .pain {
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      line-height: 1.1;
+      color: var(--text-primary);
+    }
+
+    .pain-sub {
+      font-weight: 400;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    .icon {
+      border-radius: 28px;
+      box-shadow: 0 12px 40px rgba(29, 78, 216, 0.35), 0 0 80px rgba(29, 78, 216, 0.12);
+    }
+
+    .logo {
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      background: linear-gradient(135deg, #fff 0%, var(--cobalt-pale) 40%, var(--cobalt) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .tagline {
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    .cta {
+      display: inline-block;
+      padding: 0.85rem 2.25rem;
+      background: var(--cobalt);
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 10px;
+      text-decoration: none;
+      box-shadow: 0 4px 20px rgba(29, 78, 216, 0.3);
+    }
+
+    .cta-sub {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      margin-top: 0.75rem;
+    }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 2rem;
+      color: var(--text-secondary);
+      opacity: 0.3;
+      font-size: 0.7rem;
+    }
+
+    /* ─── Variant A: Current (baseline) ─── */
+    #a .pain { font-size: clamp(2rem, 6vw, 3.5rem); max-width: 700px; }
+    #a .pain-sub { font-size: clamp(1rem, 2.5vw, 1.3rem); margin-top: 1rem; margin-bottom: 3rem; max-width: 550px; }
+    #a .icon { width: 120px; height: 120px; margin-bottom: 1.25rem; }
+    #a .logo { font-size: clamp(2.5rem, 7vw, 4rem); margin-bottom: 1rem; }
+    #a .tagline { font-size: clamp(0.95rem, 2vw, 1.1rem); max-width: 520px; }
+    #a .cta-wrap { margin-top: 1.75rem; }
+
+    /* ─── Variant B: Tighter, two-line headline ─── */
+    #b .pain {
+      font-size: clamp(2.5rem, 7vw, 4.5rem);
+      max-width: 800px;
+    }
+    #b .pain-sub {
+      font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+      margin-top: 1.25rem;
+      margin-bottom: 2.5rem;
+      max-width: 500px;
+    }
+    #b .product-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 0.75rem;
+    }
+    #b .icon { width: 64px; height: 64px; border-radius: 16px; }
+    #b .logo { font-size: 2.5rem; }
+    #b .tagline { font-size: 1.05rem; max-width: 480px; }
+    #b .cta-wrap { margin-top: 1.75rem; }
+
+    /* ─── Variant C: Pain as headline, product as supporting ─── */
+    #c .pain {
+      font-size: clamp(2.75rem, 8vw, 5rem);
+      max-width: 900px;
+      line-height: 1.05;
+    }
+    #c .pain-sub {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      margin-top: 1.5rem;
+      margin-bottom: 3rem;
+      max-width: 480px;
+      font-style: italic;
+      color: rgba(160, 160, 184, 0.7);
+    }
+    #c .divider {
+      width: 40px;
+      height: 2px;
+      background: var(--cobalt);
+      margin: 0 auto 2rem;
+      border-radius: 1px;
+    }
+    #c .product-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+    #c .icon { width: 48px; height: 48px; border-radius: 12px; box-shadow: 0 6px 24px rgba(29, 78, 216, 0.25); }
+    #c .logo { font-size: 1.75rem; }
+    #c .tagline { font-size: 1rem; max-width: 420px; margin-bottom: 0; }
+    #c .cta-wrap { margin-top: 2rem; }
+
+    /* ─── Variant D: Bold stacked, bigger icon ─── */
+    #d .pain {
+      font-size: clamp(1.5rem, 4vw, 2.25rem);
+      max-width: 600px;
+      font-weight: 600;
+      color: var(--text-emphasis);
+      letter-spacing: -0.02em;
+    }
+    #d .icon { width: 140px; height: 140px; border-radius: 32px; margin-top: 2rem; margin-bottom: 1.5rem; }
+    #d .logo { font-size: clamp(3rem, 9vw, 5.5rem); margin-bottom: 0.5rem; }
+    #d .tagline {
+      font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+      max-width: 550px;
+      color: var(--text-emphasis);
+      font-weight: 300;
+    }
+    #d .pain-sub {
+      font-size: 0.95rem;
+      margin-top: 0.75rem;
+      margin-bottom: 0;
+      max-width: 450px;
+    }
+    #d .cta-wrap { margin-top: 2.25rem; }
+
+    /* ─── Variant E: Conversational, warm ─── */
+    #e .pain {
+      font-size: clamp(1.75rem, 5vw, 3rem);
+      max-width: 750px;
+      font-weight: 800;
+      line-height: 1.2;
+    }
+    #e .pain em {
+      font-style: normal;
+      background: linear-gradient(135deg, var(--cobalt-bright), var(--cobalt-pale));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    #e .pain-sub {
+      font-size: clamp(1rem, 2vw, 1.15rem);
+      margin-top: 1rem;
+      margin-bottom: 2.5rem;
+      max-width: 520px;
+    }
+    #e .product-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+    #e .icon { width: 56px; height: 56px; border-radius: 14px; }
+    #e .logo { font-size: 2rem; }
+    #e .tagline { font-size: 0.95rem; max-width: 400px; }
+    #e .cta-wrap { margin-top: 1.5rem; }
+
+    /* ─── Variant F: Split — pain left, product right ─── */
+    #f .experiment-inner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4rem;
+      max-width: 1000px;
+      text-align: left;
+    }
+    #f .left { flex: 1; max-width: 500px; }
+    #f .right { flex: 0 0 auto; text-align: center; }
+    #f .pain {
+      font-size: clamp(2rem, 5vw, 3rem);
+      max-width: 500px;
+      text-align: left;
+    }
+    #f .pain-sub {
+      font-size: 1.1rem;
+      margin-top: 1rem;
+      margin-bottom: 2rem;
+      max-width: 450px;
+    }
+    #f .icon { width: 120px; height: 120px; margin-bottom: 1rem; }
+    #f .logo { font-size: 2.5rem; }
+    #f .tagline { font-size: 0.9rem; max-width: 200px; margin-top: 0.5rem; }
+
+    @media (max-width: 768px) {
+      #f .experiment-inner {
+        flex-direction: column;
+        text-align: center;
+        gap: 2rem;
+      }
+      #f .pain, #f .pain-sub { text-align: center; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="experiment-nav">
+    <span>Hero Experiments</span>
+    <a href="#a">A: Current</a>
+    <a href="#b">B: Inline product</a>
+    <a href="#c">C: Big pain</a>
+    <a href="#d">D: Icon-forward</a>
+    <a href="#e">E: Conversational</a>
+    <a href="#f">F: Split layout</a>
+  </nav>
+
+  <!-- A: Current baseline -->
+  <section id="a" class="experiment" data-label="A — Current (baseline)">
+    <h1 class="pain">Stop scrambling for set lists.</h1>
+    <p class="pain-sub">Your set list shouldn't be one from three gigs ago.</p>
+    <img src="/app-icon.png" class="icon" width="120" height="120" />
+    <p class="logo">Banderly</p>
+    <p class="tagline">Build set lists. Own the stage. Any device.</p>
+    <div class="cta-wrap"><a href="#" class="cta">Get Started</a></div>
+    <p class="cta-sub">Free to try — no credit card required</p>
+    <div class="scroll-hint">↓ scroll for more variants</div>
+  </section>
+
+  <!-- B: Tighter with inline product row -->
+  <section id="b" class="experiment" data-label="B — Bigger headline, inline icon+name">
+    <h1 class="pain">Stop scrambling<br>for set lists.</h1>
+    <p class="pain-sub">Your set list shouldn't be one from three gigs ago.</p>
+    <div class="product-row">
+      <img src="/app-icon.png" class="icon" width="64" height="64" />
+      <span class="logo">Banderly</span>
+    </div>
+    <p class="tagline">Build set lists. Own the stage. Any device.</p>
+    <div class="cta-wrap"><a href="#" class="cta">Get Started</a></div>
+    <p class="cta-sub">Free to try — no credit card required</p>
+  </section>
+
+  <!-- C: Maximum pain emphasis -->
+  <section id="c" class="experiment" data-label="C — Big pain, small product">
+    <h1 class="pain">Stop scrambling<br>for set lists.</h1>
+    <p class="pain-sub">"Your set list shouldn't be one from three gigs ago."</p>
+    <div class="divider"></div>
+    <div class="product-row">
+      <img src="/app-icon.png" class="icon" width="48" height="48" />
+      <span class="logo">Banderly</span>
+    </div>
+    <p class="tagline">Build set lists. Own the stage. Any device.</p>
+    <div class="cta-wrap"><a href="#" class="cta">Get Started</a></div>
+    <p class="cta-sub">Free to try — no credit card required</p>
+  </section>
+
+  <!-- D: Icon-forward, pain as opener -->
+  <section id="d" class="experiment" data-label="D — Icon hero, pain as subtitle">
+    <p class="pain">Stop scrambling for set lists.</p>
+    <img src="/app-icon.png" class="icon" width="140" height="140" />
+    <p class="logo">Banderly</p>
+    <p class="tagline">Build set lists. Own the stage. Any device.</p>
+    <p class="pain-sub">Your set list shouldn't be one from three gigs ago.</p>
+    <div class="cta-wrap"><a href="#" class="cta">Get Started</a></div>
+    <p class="cta-sub">Free to try — no credit card required</p>
+  </section>
+
+  <!-- E: Conversational with color accent -->
+  <section id="e" class="experiment" data-label="E — Conversational, color accent">
+    <h1 class="pain">Your set list shouldn't be<br>one from <em>three gigs ago</em>.</h1>
+    <p class="pain-sub">Stop scrambling. Build your set list in minutes and take it to the stage on any device.</p>
+    <div class="product-row">
+      <img src="/app-icon.png" class="icon" width="56" height="56" />
+      <span class="logo">Banderly</span>
+    </div>
+    <p class="tagline">Your band's command center.</p>
+    <div class="cta-wrap"><a href="#" class="cta">Get Started</a></div>
+    <p class="cta-sub">Free to try — no credit card required</p>
+  </section>
+
+  <!-- F: Split layout -->
+  <section id="f" class="experiment" data-label="F — Split layout">
+    <div class="experiment-inner">
+      <div class="left">
+        <h1 class="pain">Stop scrambling for set lists.</h1>
+        <p class="pain-sub">Your set list shouldn't be one from three gigs ago. Build it in minutes, take it to the stage on any device.</p>
+        <a href="#" class="cta">Get Started</a>
+        <p class="cta-sub">Free to try — no credit card required</p>
+      </div>
+      <div class="right">
+        <img src="/app-icon.png" class="icon" width="120" height="120" />
+        <p class="logo">Banderly</p>
+        <p class="tagline">Your band's<br>command center.</p>
+      </div>
+    </div>
+  </section>
+</body>
+</html>
