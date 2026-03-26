@@ -1,0 +1,248 @@
+{
+  "version": 1,
+  "exportDate": "2026-03-25T00:00:00Z",
+  "bandName": "Black River Drive",
+  "songCount": 30,
+  "songs": [
+    {
+      "title": "Aftershock",
+      "key": "A",
+      "feel": "Hard Rock",
+      "durationSeconds": 210,
+      "tags": [],
+      "vocalAssignments": { "Alex": "Lead", "Jamie": "H1" }
+    },
+    {
+      "title": "Broke the Silence",
+      "key": "E",
+      "feel": "Mid-tempo",
+      "durationSeconds": 240,
+      "tags": ["new"],
+      "vocalAssignments": { "Jamie": "Lead", "Alex": "H1" }
+    },
+    {
+      "title": "Burning Bridges",
+      "key": "Em",
+      "feel": "Hard Rock",
+      "durationSeconds": 225,
+      "tags": ["crowd-favorite"],
+      "vocalAssignments": { "Alex": "Lead", "Jamie": "H1" }
+    },
+    {
+      "title": "Chasing Thunder",
+      "key": "G",
+      "feel": "Up-tempo",
+      "durationSeconds": 200,
+      "tags": ["crowd-favorite"],
+      "vocalAssignments": { "Alex": "Lead" }
+    },
+    {
+      "title": "Copper Wire",
+      "key": "D",
+      "feel": "Up-tempo",
+      "durationSeconds": 195,
+      "tags": [],
+      "vocalAssignments": { "Alex": "Lead" }
+    },
+    {
+      "title": "Dead Signal",
+      "key": "Bm",
+      "feel": "Hard Rock",
+      "durationSeconds": 230,
+      "tags": ["needs-work"],
+      "vocalAssignments": { "Alex": "Lead", "Ryan": "H2" }
+    },
+    {
+      "title": "Deadweight",
+      "key": "E",
+      "feel": "Hard Rock",
+      "durationSeconds": 245,
+      "tags": [],
+      "vocalAssignments": { "Alex": "Lead", "Jamie": "H1", "Ryan": "H2" }
+    },
+    {
+      "title": "Edge of the World",
+      "key": "Dm",
+      "feel": "Mid-tempo",
+      "durationSeconds": 260,
+      "tags": [],
+      "vocalAssignments": { "Jamie": "Lead", "Alex": "H1" }
+    },
+    {
+      "title": "Fallout",
+      "key": "D",
+      "feel": "Hard Rock",
+      "durationSeconds": 215,
+      "tags": ["closer"],
+      "vocalAssignments": { "Alex": "Lead" }
+    },
+    {
+      "title": "Floodgates",
+      "key": "G",
+      "feel": "Up-tempo",
+      "durationSeconds": 205,
+      "tags": [],
+      "vocalAssignments": { "Alex": "Lead", "Jamie": "H1" }
+    },
+    {
+      "title": "Freefall",
+      "key": "B",
+      "feel": "Up-tempo",
+      "durationSeconds": 190,
+      "tags": ["crowd-favorite"],
+      "vocalAssignments": { "Alex": "Lead" }
+    },
+    {
+      "title": "Ghost Town",
+      "key": "Am",
+      "feel": "Ballad",
+      "durationSeconds": 280,
+      "tags": ["closer"],
+      "vocalAssignments": { "Jamie": "Lead", "Alex": "H1" }
+    },
+    {
+      "title": "Joyride",
+      "key": "A",
+      "feel": "Up-tempo",
+      "durationSeconds": 200,
+      "tags": [],
+      "vocalAssignments": { "Alex": "Lead", "Jamie": "H1" }
+    },
+    {
+      "title": "Neon Lights",
+      "key": "A",
+      "feel": "Up-tempo",
+      "durationSeconds": 210,
+      "tags": ["opener"],
+      "vocalAssignments": { "Alex": "Lead" }
+    },
+    {
+      "title": "No Return",
+      "key": "E",
+      "feel": "Hard Rock",
+      "durationSeconds": 235,
+      "tags": [],
+      "vocalAssignments": { "Alex": "Lead", "Ryan": "H2" }
+    },
+    {
+      "title": "Sirens",
+      "key": "Bm",
+      "feel": "Mid-tempo",
+      "durationSeconds": 250,
+      "tags": [],
+      "vocalAssignments": { "Alex": "Lead", "Jamie": "H1" }
+    },
+    {
+      "title": "Voltage",
+      "key": "A",
+      "feel": "Up-tempo",
+      "durationSeconds": 195,
+      "tags": [],
+      "vocalAssignments": { "Alex": "Lead" }
+    },
+    {
+      "title": "Wild Hearts",
+      "key": "G",
+      "feel": "Up-tempo",
+      "durationSeconds": 220,
+      "tags": ["crowd-favorite", "opener"],
+      "vocalAssignments": { "Alex": "Lead", "Jamie": "H1" }
+    },
+    {
+      "title": "Wrecking Ball",
+      "key": "E",
+      "feel": "Hard Rock",
+      "durationSeconds": 225,
+      "tags": [],
+      "vocalAssignments": { "Alex": "Lead" }
+    },
+    {
+      "title": "Backfire",
+      "key": "D",
+      "feel": "Hard Rock",
+      "durationSeconds": 210,
+      "tags": [],
+      "vocalAssignments": { "Alex": "Lead", "Jamie": "H1" }
+    },
+    {
+      "title": "Crossroads",
+      "key": "G",
+      "feel": "Mid-tempo",
+      "durationSeconds": 240,
+      "tags": [],
+      "vocalAssignments": { "Jamie": "Lead", "Alex": "H1" }
+    },
+    {
+      "title": "Dark Horse",
+      "key": "Em",
+      "feel": "Up-tempo",
+      "durationSeconds": 205,
+      "tags": [],
+      "vocalAssignments": { "Alex": "Lead" }
+    },
+    {
+      "title": "Fire and Rain",
+      "key": "C",
+      "feel": "Ballad",
+      "durationSeconds": 270,
+      "tags": [],
+      "vocalAssignments": { "Jamie": "Lead" }
+    },
+    {
+      "title": "Getaway",
+      "key": "A",
+      "feel": "Up-tempo",
+      "durationSeconds": 195,
+      "tags": ["new"],
+      "vocalAssignments": { "Alex": "Lead", "Jamie": "H1" }
+    },
+    {
+      "title": "Headlights",
+      "key": "F",
+      "feel": "Mid-tempo",
+      "durationSeconds": 230,
+      "tags": [],
+      "vocalAssignments": { "Alex": "Lead" }
+    },
+    {
+      "title": "Iron Sky",
+      "key": "Cm",
+      "feel": "Hard Rock",
+      "durationSeconds": 240,
+      "tags": [],
+      "vocalAssignments": { "Alex": "Lead", "Ryan": "H2" }
+    },
+    {
+      "title": "Last Call",
+      "key": "D",
+      "feel": "Mid-tempo",
+      "durationSeconds": 255,
+      "tags": ["closer"],
+      "vocalAssignments": { "Jamie": "Lead", "Alex": "H1" }
+    },
+    {
+      "title": "Midnight Run",
+      "key": "E",
+      "feel": "Up-tempo",
+      "durationSeconds": 200,
+      "tags": [],
+      "vocalAssignments": { "Alex": "Lead" }
+    },
+    {
+      "title": "Reckless",
+      "key": "G",
+      "feel": "Hard Rock",
+      "durationSeconds": 215,
+      "tags": ["crowd-favorite"],
+      "vocalAssignments": { "Alex": "Lead", "Jamie": "H1" }
+    },
+    {
+      "title": "Turnpike",
+      "key": "Bb",
+      "feel": "Up-tempo",
+      "durationSeconds": 190,
+      "tags": ["new"],
+      "vocalAssignments": { "Alex": "Lead" }
+    }
+  ]
+}
