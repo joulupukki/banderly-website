@@ -1,0 +1,248 @@
+---
+const title = "Delete Account — Banderly";
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <link rel="icon" type="image/png" href="/app-icon.png" />
+    <link rel="apple-touch-icon" href="/app-icon.png" />
+    <title>{title}</title>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+      :root {
+        --cobalt: #1d4ed8;
+        --cobalt-light: #3b82f6;
+        --cobalt-bright: #60a5fa;
+        --bg-deep: #0a0a0f;
+        --border-subtle: rgba(29, 78, 216, 0.15);
+        --text-primary: #f0f0f5;
+        --text-secondary: #a0a0b8;
+        --text-emphasis: #d0d0e0;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: 'Inter', system-ui, sans-serif;
+        background: var(--bg-deep);
+        color: var(--text-secondary);
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        line-height: 1.7;
+        font-size: 0.9rem;
+      }
+
+      .container {
+        max-width: 520px;
+        margin: 0 auto;
+        padding: 5rem 1.5rem 4rem;
+      }
+
+      .back-link {
+        display: inline-block;
+        margin-bottom: 2.5rem;
+        font-size: 0.85rem;
+        color: var(--cobalt-bright);
+        text-decoration: none;
+        transition: color 0.2s ease;
+      }
+
+      .back-link:hover {
+        color: var(--cobalt-light);
+      }
+
+      h1 {
+        font-size: clamp(1.75rem, 5vw, 2.25rem);
+        font-weight: 800;
+        color: var(--text-primary);
+        letter-spacing: -0.03em;
+        margin-bottom: 0.5rem;
+        line-height: 1.2;
+      }
+
+      .page-desc {
+        color: var(--text-secondary);
+        margin-bottom: 2.5rem;
+        font-size: 0.95rem;
+      }
+
+      .form-group {
+        margin-bottom: 1.5rem;
+      }
+
+      label {
+        display: block;
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: var(--text-emphasis);
+        margin-bottom: 0.4rem;
+      }
+
+      input, textarea {
+        width: 100%;
+        padding: 0.7rem 0.9rem;
+        font-size: 0.9rem;
+        font-family: 'Inter', system-ui, sans-serif;
+        color: var(--text-primary);
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+        outline: none;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      input:focus, textarea:focus {
+        border-color: var(--cobalt-bright);
+        box-shadow: 0 0 0 3px rgba(29, 78, 216, 0.15);
+      }
+
+      input::placeholder, textarea::placeholder {
+        color: rgba(160, 160, 184, 0.4);
+      }
+
+      textarea {
+        resize: vertical;
+        min-height: 100px;
+      }
+
+      .submit-btn {
+        display: inline-block;
+        padding: 0.75rem 2rem;
+        background: var(--cobalt);
+        color: #fff;
+        font-size: 0.9rem;
+        font-weight: 600;
+        font-family: 'Inter', system-ui, sans-serif;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+        box-shadow: 0 4px 16px rgba(29, 78, 216, 0.25);
+      }
+
+      .submit-btn:hover {
+        background: var(--cobalt-light);
+        transform: translateY(-1px);
+        box-shadow: 0 6px 24px rgba(29, 78, 216, 0.35);
+      }
+
+      .submit-btn:active {
+        transform: translateY(0);
+      }
+
+      .steps {
+        margin-top: 3rem;
+        padding: 1.75rem;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 10px;
+      }
+
+      .steps h2 {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        margin-bottom: 1.25rem;
+      }
+
+      .steps ol {
+        list-style: none;
+        counter-reset: steps;
+        padding: 0;
+      }
+
+      .steps li {
+        counter-increment: steps;
+        position: relative;
+        padding-left: 2.25rem;
+        margin-bottom: 1.25rem;
+        font-size: 0.88rem;
+        line-height: 1.6;
+        color: var(--text-emphasis);
+      }
+
+      .steps li:last-child {
+        margin-bottom: 0;
+      }
+
+      .steps li::before {
+        content: counter(steps);
+        position: absolute;
+        left: 0;
+        top: 0.05rem;
+        width: 1.5rem;
+        height: 1.5rem;
+        background: rgba(29, 78, 216, 0.15);
+        color: var(--cobalt-bright);
+        font-size: 0.75rem;
+        font-weight: 700;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .footer {
+        text-align: center;
+        padding: 2rem 1.5rem 3rem;
+        font-size: 0.75rem;
+        color: rgba(160, 160, 184, 0.4);
+        letter-spacing: 0.02em;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <a href="/" class="back-link">&larr; Back to home</a>
+
+      <h1>Delete Your Account</h1>
+      <p class="page-desc">We're sorry to see you go. Please fill out the form below to request account deletion.</p>
+
+      <form action="https://formsubmit.co/1f77afc5d1d29d5386a171471e0a6ec7" method="POST">
+        <input type="hidden" name="_subject" value="Account deletion request from banderly.com" />
+        <input type="hidden" name="_next" value="https://www.banderly.com/contact/thanks" />
+        <input type="text" name="_honey" style="display:none" />
+
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" placeholder="Your name" required />
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="Use the same email as your Banderly account" required />
+        </div>
+
+        <div class="form-group">
+          <label for="message">Additional Comments (optional)</label>
+          <textarea id="message" name="message" placeholder="Let us know if there's anything else we should know"></textarea>
+        </div>
+
+        <button type="submit" class="submit-btn">Request Account Deletion</button>
+      </form>
+
+      <div class="steps">
+        <h2>How account deletion works</h2>
+        <ol>
+          <li>Ensure that you have removed yourself from all bands on the Banderly platform.</li>
+          <li>Fill out your name and email above. You must use the same email address associated with your Banderly account.</li>
+          <li>We will send a verification email to you. You must respond before we take any deletion action. This confirms you have access to the email account in question and protects you and your account.</li>
+          <li>After email confirmation, we will verify that your account does not belong to any bands.</li>
+          <li>If all criteria are met, your account will be permanently deleted within 30 business days. This includes any email address, name, and any contact information stored in the Banderly system.</li>
+        </ol>
+      </div>
+    </div>
+
+    <footer class="footer">
+      &copy; 2026 Banderly
+    </footer>
+  </body>
+</html>
