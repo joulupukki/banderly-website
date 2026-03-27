@@ -1,6 +1,6 @@
 ---
 const title = "Banderly — Your Band's Command Center";
-const description = "Manage your songs, build set lists, and own the stage. Banderly is the powerful tool for bands — free to try.";
+const description = "Manage your songs, build set lists, and own the stage. Banderly is the powerful tool for bands.";
 ---
 
 <html lang="en">
@@ -548,6 +548,366 @@ const description = "Manage your songs, build set lists, and own the stage. Band
         display: block;
       }
 
+      /* ─── Interactive Web Demo ─── */
+      .demo-app {
+        display: flex;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica Neue, Arial, sans-serif;
+        font-size: 13px;
+        color: #1a1a1a;
+        background: #fff;
+        line-height: 1.5;
+        -webkit-font-smoothing: antialiased;
+        min-height: 480px;
+        user-select: none;
+      }
+
+      .demo-sidebar {
+        width: 160px;
+        flex-shrink: 0;
+        background: #fafafa;
+        border-right: 1px solid #e5e5e5;
+        padding: 0.75rem 0;
+      }
+
+      .demo-brand {
+        font-weight: 800;
+        font-size: 1rem;
+        color: #1d4ed8;
+        padding: 0 1rem 0.5rem;
+      }
+
+      .demo-band-switcher {
+        font-size: 0.8rem;
+        color: #555;
+        padding: 0.3rem 1rem;
+        margin: 0 0.5rem 0.5rem;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        background: #fff;
+      }
+
+      .demo-chevron {
+        color: #999;
+        font-size: 0.7rem;
+      }
+
+      .demo-nav {
+        display: flex;
+        flex-direction: column;
+        margin-top: 0.25rem;
+      }
+
+      .demo-nav-link {
+        padding: 0.4rem 1rem;
+        color: #666;
+        font-size: 0.8rem;
+        cursor: default;
+      }
+
+      .demo-nav-active {
+        color: #1d4ed8;
+        background: rgba(29, 78, 216, 0.05);
+        border-left: 3px solid #1d4ed8;
+        font-weight: 600;
+      }
+
+      .demo-main {
+        flex: 1;
+        min-width: 0;
+        position: relative;
+      }
+
+      .demo-topbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.5rem 1.25rem;
+        border-bottom: 1px solid #eee;
+      }
+
+      .demo-back {
+        color: #1d4ed8;
+        font-size: 0.8rem;
+      }
+
+      .demo-topbar-actions {
+        display: flex;
+        gap: 0.35rem;
+      }
+
+      .demo-btn-outline {
+        font-size: 0.75rem;
+        padding: 0.3rem 0.7rem;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        background: #fff;
+        color: #555;
+        cursor: default;
+        font-family: inherit;
+      }
+
+      .demo-btn-primary {
+        font-size: 0.75rem;
+        padding: 0.3rem 0.9rem;
+        border: none;
+        border-radius: 6px;
+        background: #1d4ed8;
+        color: #fff;
+        font-weight: 600;
+        cursor: default;
+        font-family: inherit;
+      }
+
+      .demo-content {
+        padding: 1rem 1.25rem;
+      }
+
+      .demo-title {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: #1a1a1a;
+        margin-bottom: 0.15rem;
+      }
+
+      .demo-venue {
+        font-size: 0.8rem;
+        color: #1d4ed8;
+        margin-bottom: 0.35rem;
+      }
+
+      .demo-stats {
+        font-size: 0.8rem;
+        color: #888;
+        margin-bottom: 0.75rem;
+      }
+
+      .demo-instrument-row {
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        padding: 0.4rem 0.5rem;
+        background: #f0f0f0;
+        border: 1px solid #d0d0d0;
+        border-radius: 6px;
+        margin-bottom: 0.5rem;
+        font-size: 0.75rem;
+        color: #555;
+      }
+
+      .demo-instrument-grid {
+        display: flex;
+        flex: 1;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+      }
+
+      .demo-inst-divider {
+        width: 1px;
+        height: 1rem;
+        background: rgba(0, 0, 0, 0.15);
+      }
+
+      .demo-inst-actions {
+        color: #bbb;
+        font-size: 0.75rem;
+        white-space: nowrap;
+        letter-spacing: 0.15em;
+      }
+
+      .demo-drag {
+        color: #ccc;
+        font-size: 0.9rem;
+        cursor: grab;
+        flex-shrink: 0;
+        width: 1rem;
+        text-align: center;
+      }
+
+      .demo-song-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0.35rem;
+      }
+
+      .demo-song-row {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.4rem;
+        padding: 0.5rem 0.5rem;
+        border: 1px solid #eee;
+        border-radius: 6px;
+        background: #fff;
+        cursor: grab;
+        transition: border-color 0.15s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+      }
+
+      .demo-song-row:hover {
+        border-color: #ddd;
+      }
+
+      .demo-song-row.demo-dragging {
+        opacity: 0.4;
+        border-color: #1d4ed8;
+      }
+
+      .demo-song-row.demo-drag-over {
+        border-color: #1d4ed8;
+        box-shadow: 0 2px 8px rgba(29, 78, 216, 0.15);
+      }
+
+      .demo-song-row.demo-animating {
+        transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                    box-shadow 0.3s ease;
+      }
+
+      .demo-song-row.demo-lifted {
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+        z-index: 10;
+        position: relative;
+        border-color: #1d4ed8;
+      }
+
+      .demo-key {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 2rem;
+        padding: 0.05rem 0.3rem;
+        background: #e8e8e8;
+        color: #555;
+        font-size: 0.75rem;
+        font-weight: 700;
+        border-radius: 4px;
+        flex-shrink: 0;
+        margin-top: 0.1rem;
+      }
+
+      .demo-song-info {
+        flex: 1;
+        min-width: 0;
+      }
+
+      .demo-song-title {
+        font-weight: 500;
+        color: #1a1a1a;
+        font-size: 0.85rem;
+      }
+
+      .demo-song-meta {
+        font-size: 0.7rem;
+        color: #888;
+      }
+
+      .demo-song-tags {
+        display: flex;
+        gap: 0.25rem;
+        margin-top: 0.15rem;
+      }
+
+      .demo-tag {
+        font-size: 0.65rem;
+        color: #666;
+        background: #f0f0f0;
+        padding: 0.02rem 0.35rem;
+        border-radius: 4px;
+      }
+
+      .demo-song-actions {
+        color: #ccc;
+        font-size: 0.7rem;
+        white-space: nowrap;
+        letter-spacing: 0.1em;
+        flex-shrink: 0;
+        margin-top: 0.15rem;
+      }
+
+      .demo-fab {
+        position: absolute;
+        bottom: 1rem;
+        right: 1rem;
+        width: 2.5rem;
+        height: 2.5rem;
+        background: #1d4ed8;
+        color: #fff;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.25rem;
+        font-weight: 300;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      }
+
+      @media (max-width: 768px) {
+        .demo-sidebar {
+          display: none;
+        }
+
+        .demo-app {
+          min-height: 360px;
+          font-size: 11px;
+        }
+      }
+
+
+      /* ─── PDF Callout ─── */
+      .pdf-callout {
+        display: flex;
+        align-items: center;
+        gap: 2.5rem;
+        margin-top: 3.5rem;
+        max-width: 820px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .pdf-text {
+        flex: 1;
+      }
+
+      .pdf-title {
+        font-size: 1.35rem;
+        font-weight: 800;
+        color: var(--text-primary);
+        letter-spacing: -0.02em;
+        margin-bottom: 0.65rem;
+      }
+
+      .pdf-desc {
+        font-size: 0.95rem;
+        color: var(--text-secondary);
+        line-height: 1.65;
+      }
+
+      .pdf-preview {
+        flex: 0 0 320px;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow:
+          0 12px 40px rgba(0, 0, 0, 0.3),
+          0 0 0 1px rgba(255, 255, 255, 0.06);
+      }
+
+      .pdf-preview img {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      @media (max-width: 768px) {
+        .pdf-callout {
+          flex-direction: column;
+          text-align: center;
+          gap: 1.5rem;
+        }
+
+        .pdf-preview {
+          flex: none;
+          width: 100%;
+          max-width: 320px;
+        }
+      }
 
       /* ─── Divider ─── */
       .section-divider {
@@ -985,7 +1345,6 @@ const description = "Manage your songs, build set lists, and own the stage. Band
         <div class="hero-cta">
           <a href="https://app.banderly.com" class="cta-button">Get Started</a>
         </div>
-        <p class="cta-sub hero-cta-sub">Free to try — no credit card required</p>
         <div class="hero-scroll">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <polyline points="6 9 12 15 18 9"></polyline>
@@ -1026,7 +1385,7 @@ const description = "Manage your songs, build set lists, and own the stage. Band
         <h2 class="section-title reveal">Powerful on the big screen</h2>
         <p class="section-subtitle reveal">Full set list builder in your browser. Manage your songs, build set lists, and collaborate with your band — no download required.</p>
 
-        <div class="browser-mockup reveal">
+        <div class="browser-mockup reveal" id="web-demo">
           <div class="browser-bar">
             <div class="browser-dots">
               <span></span><span></span><span></span>
@@ -1034,7 +1393,123 @@ const description = "Manage your songs, build set lists, and own the stage. Band
             <div class="browser-address">app.banderly.com</div>
           </div>
           <div class="browser-content">
-            <img src="/images/screenshot-web-setlist-detail.png" alt="Banderly web app showing set list builder with band member instrument sections and drag-and-drop songs" loading="lazy" />
+            <div class="demo-app">
+              <!-- Sidebar -->
+              <div class="demo-sidebar">
+                <div class="demo-brand">Banderly</div>
+                <div class="demo-band-switcher">Black River Drive <span class="demo-chevron">▾</span></div>
+                <nav class="demo-nav">
+                  <a class="demo-nav-link">Dashboard</a>
+                  <a class="demo-nav-link">Songs</a>
+                  <a class="demo-nav-link demo-nav-active">Set Lists</a>
+                  <a class="demo-nav-link">Roster</a>
+                  <a class="demo-nav-link">Settings</a>
+                </nav>
+              </div>
+              <!-- Main content -->
+              <div class="demo-main">
+                <div class="demo-topbar">
+                  <span class="demo-back">← Back</span>
+                  <div class="demo-topbar-actions">
+                    <button class="demo-btn-outline">Copy Text</button>
+                    <button class="demo-btn-outline">PDF</button>
+                    <button class="demo-btn-primary">Perform</button>
+                  </div>
+                </div>
+                <div class="demo-content">
+                  <h2 class="demo-title">Saturday at The Warehouse</h2>
+                  <div class="demo-venue">+ Add venue or date</div>
+                  <div class="demo-stats">15 songs · 54m 25s</div>
+                  <!-- Instrument header -->
+                  <div class="demo-instrument-row">
+                    <span class="demo-drag">⠿</span>
+                    <div class="demo-instrument-grid">
+                      <span><strong>Alex</strong>: Lead Guitar</span>
+                      <span class="demo-inst-divider"></span>
+                      <span><strong>Jamie</strong>: Rhythm Guitar</span>
+                      <span class="demo-inst-divider"></span>
+                      <span><strong>Ryan</strong>: Bass</span>
+                      <span class="demo-inst-divider"></span>
+                      <span><strong>Taylor</strong>: Drums</span>
+                    </div>
+                    <div class="demo-inst-actions">+ ↕ ⧉ ×</div>
+                  </div>
+                  <!-- Song rows -->
+                  <div class="demo-song-list" id="demo-song-list">
+                    <div class="demo-song-row" draggable="true" data-index="0">
+                      <span class="demo-drag">⠿</span>
+                      <span class="demo-key">G</span>
+                      <div class="demo-song-info">
+                        <div class="demo-song-title">Wild Hearts</div>
+                        <div class="demo-song-meta">Alex · H1: Jamie · Up-tempo</div>
+                        <div class="demo-song-tags"><span class="demo-tag">crowd-favorite</span><span class="demo-tag">opener</span></div>
+                      </div>
+                      <div class="demo-song-actions">✂ ×</div>
+                    </div>
+                    <div class="demo-song-row" draggable="true" data-index="1">
+                      <span class="demo-drag">⠿</span>
+                      <span class="demo-key">A</span>
+                      <div class="demo-song-info">
+                        <div class="demo-song-title">Neon Lights</div>
+                        <div class="demo-song-meta">Alex · Up-tempo</div>
+                        <div class="demo-song-tags"><span class="demo-tag">opener</span></div>
+                      </div>
+                      <div class="demo-song-actions">✂ ×</div>
+                    </div>
+                    <div class="demo-song-row" draggable="true" data-index="2">
+                      <span class="demo-drag">⠿</span>
+                      <span class="demo-key">Em</span>
+                      <div class="demo-song-info">
+                        <div class="demo-song-title">Burning Bridges</div>
+                        <div class="demo-song-meta">Alex · H1: Jamie · Hard Rock</div>
+                        <div class="demo-song-tags"><span class="demo-tag">crowd-favorite</span></div>
+                      </div>
+                      <div class="demo-song-actions">✂ ×</div>
+                    </div>
+                    <div class="demo-song-row" draggable="true" data-index="3">
+                      <span class="demo-drag">⠿</span>
+                      <span class="demo-key">G</span>
+                      <div class="demo-song-info">
+                        <div class="demo-song-title">Chasing Thunder</div>
+                        <div class="demo-song-meta">Alex · Up-tempo</div>
+                        <div class="demo-song-tags"><span class="demo-tag">crowd-favorite</span></div>
+                      </div>
+                      <div class="demo-song-actions">✂ ×</div>
+                    </div>
+                    <div class="demo-song-row" draggable="true" data-index="4">
+                      <span class="demo-drag">⠿</span>
+                      <span class="demo-key">D</span>
+                      <div class="demo-song-info">
+                        <div class="demo-song-title">Copper Wire</div>
+                        <div class="demo-song-meta">Alex · Up-tempo</div>
+                      </div>
+                      <div class="demo-song-actions">✂ ×</div>
+                    </div>
+                    <div class="demo-song-row" draggable="true" data-index="5">
+                      <span class="demo-drag">⠿</span>
+                      <span class="demo-key">E</span>
+                      <div class="demo-song-info">
+                        <div class="demo-song-title">Deadweight</div>
+                        <div class="demo-song-meta">Alex · H1: Jamie · H2: Ryan · Hard Rock</div>
+                      </div>
+                      <div class="demo-song-actions">✂ ×</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="demo-fab">+</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="showcase-caption reveal">Drag and drop to rearrange your set list in seconds. Try it above.</p>
+
+        <div class="pdf-callout reveal">
+          <div class="pdf-text">
+            <h3 class="pdf-title">Prefer paper on stage?</h3>
+            <p class="pdf-desc">Generate a clean, print-ready PDF of any set list with one click. Keys, vocals, instrument sections — all formatted and ready to go.</p>
+          </div>
+          <div class="pdf-preview">
+            <img src="/images/setlist-pdf-preview.png" alt="Example PDF export of a Banderly set list showing song keys, titles, and vocal assignments" loading="lazy" />
           </div>
         </div>
       </section>
@@ -1156,8 +1631,8 @@ const description = "Manage your songs, build set lists, and own the stage. Band
                 <line x1="12" y1="15" x2="12" y2="3"></line>
               </svg>
             </span>
-            <h4>Export Anywhere</h4>
-            <p>Export your songs and set lists as CSV, JSON, or formatted PDF. Your data, your way.</p>
+            <h4>Print-Ready PDFs</h4>
+            <p>Generate clean, formatted PDFs of any set list with one click. Prefer paper on stage? You're covered.</p>
           </div>
 
           <div class="detail-cell reveal reveal-delay-5">
@@ -1195,7 +1670,7 @@ const description = "Manage your songs, build set lists, and own the stage. Band
       <section class="closing">
         <img src="/app-icon.png" alt="Banderly app icon" class="closing-icon reveal" width="64" height="64" />
         <h2 class="closing-title reveal">Ready to own the stage?</h2>
-        <p class="closing-sub reveal">Set up your band in minutes. Free to try.</p>
+        <p class="closing-sub reveal">Set up your band in minutes.</p>
         <div class="reveal reveal-delay-1" style="position: relative;">
           <a href="https://app.banderly.com" class="cta-button">Get Started</a>
         </div>
@@ -1256,6 +1731,165 @@ const description = "Manage your songs, build set lists, and own the stage. Band
       }, { threshold: 0 });
       navObserver.observe(hero);
 
+      // ─── Interactive Web Demo ───
+      (function() {
+        const songList = document.getElementById('demo-song-list');
+        const webDemo = document.getElementById('web-demo');
+        if (!songList || !webDemo) return;
+
+        // Save original song order for reset
+        const originalOrder = [...songList.querySelectorAll('.demo-song-row')];
+
+        // Auto-animate on scroll in, reset on scroll out
+        let hasAutoAnimated = false;
+        let animTimeout = null;
+        const demoObserver = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting && !hasAutoAnimated) {
+              hasAutoAnimated = true;
+              animTimeout = setTimeout(() => autoAnimate(), 900);
+            } else if (!entry.isIntersecting && hasAutoAnimated) {
+              // Only reset if scrolled back up (section is below viewport)
+              const rect = webDemo.getBoundingClientRect();
+              if (rect.top > 0) {
+                hasAutoAnimated = false;
+                if (animTimeout) { clearTimeout(animTimeout); animTimeout = null; }
+                songList.querySelectorAll('.demo-song-row').forEach(r => {
+                  r.classList.remove('demo-animating', 'demo-lifted', 'demo-dragging', 'demo-drag-over');
+                  r.style.transform = '';
+                });
+                originalOrder.forEach(r => songList.appendChild(r));
+              }
+            }
+          });
+        }, { threshold: 0.35 });
+        demoObserver.observe(webDemo);
+
+        function autoAnimate() {
+          const rows = songList.querySelectorAll('.demo-song-row');
+          if (rows.length < 3) return;
+
+          const row0 = rows[0];
+          const row1 = rows[1];
+          const row2 = rows[2];
+          const gap = parseFloat(getComputedStyle(songList).gap) || 0;
+          const rowHeight = row0.offsetHeight + gap;
+
+          [row0, row1, row2].forEach(r => r.classList.add('demo-animating'));
+
+          row0.classList.add('demo-lifted');
+          row0.style.transform = 'translateY(' + (rowHeight * 2) + 'px)';
+          row1.style.transform = 'translateY(-' + rowHeight + 'px)';
+          row2.style.transform = 'translateY(-' + rowHeight + 'px)';
+
+          setTimeout(() => {
+            [row0, row1, row2].forEach(r => {
+              r.classList.remove('demo-animating', 'demo-lifted');
+              r.style.transform = '';
+            });
+            songList.insertBefore(row1, row0);
+            songList.insertBefore(row2, row0);
+          }, 600);
+        }
+
+        // Drag and drop
+        let dragRow = null;
+
+        songList.addEventListener('dragstart', (e) => {
+          const row = e.target.closest('.demo-song-row');
+          if (!row) return;
+          dragRow = row;
+          row.classList.add('demo-dragging');
+          e.dataTransfer.effectAllowed = 'move';
+        });
+
+        songList.addEventListener('dragend', (e) => {
+          const row = e.target.closest('.demo-song-row');
+          if (row) row.classList.remove('demo-dragging');
+          songList.querySelectorAll('.demo-drag-over').forEach(r => r.classList.remove('demo-drag-over'));
+          dragRow = null;
+        });
+
+        songList.addEventListener('dragover', (e) => {
+          e.preventDefault();
+          e.dataTransfer.dropEffect = 'move';
+          const target = e.target.closest('.demo-song-row');
+          if (!target || target === dragRow) return;
+          songList.querySelectorAll('.demo-drag-over').forEach(r => r.classList.remove('demo-drag-over'));
+          target.classList.add('demo-drag-over');
+        });
+
+        songList.addEventListener('dragleave', (e) => {
+          const target = e.target.closest('.demo-song-row');
+          if (target) target.classList.remove('demo-drag-over');
+        });
+
+        songList.addEventListener('drop', (e) => {
+          e.preventDefault();
+          const target = e.target.closest('.demo-song-row');
+          if (!target || !dragRow || target === dragRow) return;
+          const targetRect = target.getBoundingClientRect();
+          const midY = targetRect.top + targetRect.height / 2;
+          if (e.clientY < midY) {
+            songList.insertBefore(dragRow, target);
+          } else {
+            songList.insertBefore(dragRow, target.nextSibling);
+          }
+          target.classList.remove('demo-drag-over');
+        });
+
+        // Touch drag support
+        let touchRow = null;
+        let touchClone = null;
+        let touchOffsetY = 0;
+
+        songList.addEventListener('touchstart', (e) => {
+          const handle = e.target.closest('.demo-drag');
+          if (!handle) return;
+          const row = handle.closest('.demo-song-row');
+          if (!row) return;
+          touchRow = row;
+          const rect = row.getBoundingClientRect();
+          touchOffsetY = e.touches[0].clientY - rect.top;
+
+          touchClone = row.cloneNode(true);
+          touchClone.style.cssText = 'position:fixed;left:' + rect.left + 'px;top:' + rect.top + 'px;width:' + rect.width + 'px;z-index:9999;opacity:0.9;box-shadow:0 6px 20px rgba(0,0,0,0.15);border-color:#1d4ed8;pointer-events:none;';
+          document.body.appendChild(touchClone);
+          row.classList.add('demo-dragging');
+          e.preventDefault();
+        }, { passive: false });
+
+        songList.addEventListener('touchmove', (e) => {
+          if (!touchRow || !touchClone) return;
+          e.preventDefault();
+          const y = e.touches[0].clientY;
+          touchClone.style.top = (y - touchOffsetY) + 'px';
+          songList.querySelectorAll('.demo-drag-over').forEach(r => r.classList.remove('demo-drag-over'));
+          for (const r of songList.querySelectorAll('.demo-song-row')) {
+            if (r === touchRow) continue;
+            const rect = r.getBoundingClientRect();
+            if (y > rect.top && y < rect.bottom) { r.classList.add('demo-drag-over'); break; }
+          }
+        }, { passive: false });
+
+        songList.addEventListener('touchend', () => {
+          if (!touchRow) return;
+          const target = songList.querySelector('.demo-drag-over');
+          if (target && target !== touchRow) {
+            const rect = target.getBoundingClientRect();
+            const lastY = touchClone ? parseFloat(touchClone.style.top) + touchOffsetY : 0;
+            if (lastY < rect.top + rect.height / 2) {
+              songList.insertBefore(touchRow, target);
+            } else {
+              songList.insertBefore(touchRow, target.nextSibling);
+            }
+          }
+          touchRow.classList.remove('demo-dragging');
+          songList.querySelectorAll('.demo-drag-over').forEach(r => r.classList.remove('demo-drag-over'));
+          if (touchClone) { touchClone.remove(); touchClone = null; }
+          touchRow = null;
+        });
+      })();
     </script>
   </body>
 </html>
