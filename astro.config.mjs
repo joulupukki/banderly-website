@@ -9,7 +9,7 @@ export default defineConfig({
   integrations: [
     sitemap({
       filter: (page) =>
-        !page.includes('/privacy') && !page.includes('/terms'),
+        !page.includes('/privacy') && !page.includes('/terms') && !page.includes('/contact/thanks'),
     }),
   ],
 });

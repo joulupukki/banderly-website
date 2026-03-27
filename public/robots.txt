@@ -2,5 +2,6 @@ User-agent: *
 Allow: /
 Disallow: /privacy
 Disallow: /terms
+Disallow: /contact/thanks
 
 Sitemap: https://www.banderly.com/sitemap-index.xml

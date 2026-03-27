@@ -1134,13 +1134,37 @@ const description = "Manage your songs, build set lists, and own the stage. Band
         animation: fadeInUp 0.8s ease-out 0.4s both;
       }
 
-      .hero-cta-sub {
+      .hero-signin {
+        font-size: 0.8rem;
+        color: var(--text-secondary);
+        margin-top: 0.85rem;
         animation: fadeInUp 0.8s ease-out 0.5s both;
       }
 
+      .hero-signin a {
+        color: var(--cobalt-bright);
+        text-decoration: none;
+        transition: color 0.2s ease;
+      }
+
+      .hero-signin a:hover {
+        color: var(--cobalt-light);
+      }
+
       /* ─── Nav CTA ─── */
-      .sticky-nav-cta {
+      .sticky-nav-signin {
         margin-left: auto;
+        font-size: 0.8rem;
+        color: var(--text-secondary);
+        text-decoration: none;
+        transition: color 0.2s ease;
+      }
+
+      .sticky-nav-signin:hover {
+        color: var(--text-primary);
+      }
+
+      .sticky-nav-cta {
         padding: 0.4rem 1rem;
         background: var(--cobalt);
         color: #fff;
@@ -1327,6 +1351,7 @@ const description = "Manage your songs, build set lists, and own the stage. Band
       <nav class="sticky-nav">
         <img src="/app-icon.png" alt="Banderly app icon" class="sticky-nav-icon" width="28" height="28" />
         <span class="sticky-nav-name">Banderly</span>
+        <a href="https://app.banderly.com" class="sticky-nav-signin">Sign In</a>
         <a href="https://app.banderly.com" class="sticky-nav-cta">Get Started</a>
       </nav>
 
@@ -1344,6 +1369,7 @@ const description = "Manage your songs, build set lists, and own the stage. Band
         </p>
         <div class="hero-cta">
           <a href="https://app.banderly.com" class="cta-button">Get Started</a>
+          <p class="hero-signin">Already have an account? <a href="https://app.banderly.com">Sign in</a></p>
         </div>
         <div class="hero-scroll">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -1694,6 +1720,7 @@ const description = "Manage your songs, build set lists, and own the stage. Band
 
       <footer class="footer">
         <div class="footer-links">
+          <a href="/contact">Contact Us</a>
           <a href="/privacy">Privacy Policy</a>
           <a href="/terms">Terms of Use</a>
         </div>
