@@ -1242,17 +1242,8 @@ const description = "Manage your songs, build set lists, and own the stage. Band
         display: block;
       }
 
-      .google-play-coming-soon img {
-        opacity: 0.35;
-      }
-
-      .coming-soon-label {
-        font-size: 0.65rem;
-        font-weight: 600;
-        color: var(--text-secondary);
-        letter-spacing: 0.05em;
-        text-transform: uppercase;
-        margin-top: -0.25rem;
+      a.google-play-badge-link:hover {
+        opacity: 0.8;
       }
 
       /* ─── Footer ─── */
@@ -1775,10 +1766,9 @@ const description = "Manage your songs, build set lists, and own the stage. Band
           </a>
         </div>
         <div class="store-badges-official reveal reveal-delay-3" style="margin-top: 0.5rem;">
-          <span class="google-play-badge-link google-play-coming-soon">
-            <img src="/images/google-play-badge.png" alt="Get it on Google Play — Coming Soon" height="60" />
-            <span class="coming-soon-label">Coming Soon</span>
-          </span>
+          <a href="https://play.google.com/store/apps/details?id=com.banderly.android" class="google-play-badge-link">
+            <img src="/images/google-play-badge.png" alt="Get it on Google Play" height="60" />
+          </a>
         </div>
       </section>
 
